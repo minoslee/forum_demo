@@ -37,3 +37,6 @@ Route::get('/logout','LoginController@logout');
 
 //提交评论
 Route::post('/article/{num}/comment','ArticleController@comment');
+
+//点赞
+Route::get('/article/{num}/zan','ArticleController@zan');

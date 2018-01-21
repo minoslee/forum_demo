@@ -96,4 +96,13 @@ class ArticleController extends Controller
             return redirect()->back()->withInput()->withErrors('评论失败');
     }
 
+    public function zan($id)
+    {
+        $param = [
+            'user_id'=>\Auth::id(),
+            'article_id'=> $id,
+        ];
+        Zan::firstOrCreate($param);
+    }
+
 }
