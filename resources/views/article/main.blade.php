@@ -8,19 +8,12 @@
     <meta name="description" content="">
     <meta name="author" content="">
     <meta name="csrf-token" content="4BfTBDF90Mjp8hdoie6QGDPJF2J5AgmpsC9ddFHD">
-
-
     <title>laravel for blog</title>
-
     <!-- Bootstrap core CSS -->
     <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
-
-
     <!-- Custom styles for this template -->
     <link href="css/blog.css" rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="css/wangEditor.min.css">
-
-
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
     <script src="https://cdn.bootcss.com/html5shiv/3.7.3/html5shiv.min.js"></script>
@@ -28,19 +21,12 @@
 
     <![endif]-->
 </head>
-
 <body>
-
 @include ('layout.nav')
-
 <div class="container">
-
     <div class="blog-header">
     </div>
-
     <div class="row">
-
-
         <div class="col-sm-8 blog-main">
             <div class="blog-post">
                 <div style="display:inline-flex">
@@ -62,8 +48,11 @@
                 <p class="blog-post-meta">{{$article->created_at}} <a href="#">{{$article->user->name}}</a></p>
                 {{$article->content}}
                 <div>
-                    <a href="/posts/62/zan" type="button" class="btn btn-primary btn-lg">赞</a>
-
+                    @if ($article->zan()->exists())
+                        <a href="#" type="button" class="btn btn-primary btn-lg">您已赞过</a>
+                    @else
+                        <a href="{{url('/article/'.$article->id.'/zan')}}" type="button" class="btn btn-primary btn-lg">赞</a>
+                    @endif
                 </div>
             </div>
 

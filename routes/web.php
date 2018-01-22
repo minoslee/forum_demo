@@ -10,11 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
-//Route::get('/', function () {
-//    return view('welcome');
-//});
-
 Route::get('/','ArticleController@index');
 Route::get('/home','ArticleController@index');
 
@@ -40,3 +35,8 @@ Route::post('/article/{num}/comment','ArticleController@comment');
 
 //点赞
 Route::get('/article/{num}/zan','ArticleController@zan');
+
+//管理后台
+Route::group(['prefix'=>'admin'],function (){
+
+});

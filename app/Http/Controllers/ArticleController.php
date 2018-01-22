@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use App\Comment;
 use App\User;
+use App\Zan;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -12,7 +13,7 @@ class ArticleController extends Controller
     //首页
     public function index()
     {
-        $articles = Article::orderBy('created_at','desc')->withCount('comment')->paginate(5);
+        $articles = Article::orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
         //return view('article.index')->with('articles',Article::paginate(5));
         return view('article.index',compact('articles'));
     }
@@ -80,6 +81,8 @@ class ArticleController extends Controller
     //  提交评论
     public function comment(Request $request)
     {
+        if(!\Auth::check())
+            return redirect('/login');
         $this->validate($request,[
             'content'=>'required|min:3',
             'article_id'=>'required|exists:articles,id',
@@ -98,11 +101,12 @@ class ArticleController extends Controller
 
     public function zan($id)
     {
-        $param = [
-            'user_id'=>\Auth::id(),
-            'article_id'=> $id,
-        ];
-        Zan::firstOrCreate($param);
+        if(!\Auth::check())
+            return redirect('/login');
+        $zan = new Zan();
+        $zan->user_id = \Auth::id();
+        $zan->article_id = $id;
+        if($zan->save())
+            return redirect()->back();
     }
-
 }

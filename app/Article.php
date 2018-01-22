@@ -18,4 +18,15 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class)->orderBy('created_at','desc');
     }
+
+    public function zan()
+    {
+        $id = \Auth::id();
+        return $this->hasOne(Zan::class)->where('user_id','=',"$id");
+    }
+    //和文章进行点赞关联
+    public function zans()
+    {
+        return $this->hasMany(Zan::class);
+    }
 }
