@@ -36,6 +36,9 @@ Route::post('/article/{num}/comment','ArticleController@comment');
 //点赞
 Route::get('/article/{num}/zan','ArticleController@zan');
 
+//个人主页
+Route::get('/user/{user}','UserController@show');
+
 //管理后台
 Route::group(['prefix'=>'admin'],function (){
 
