@@ -10,24 +10,34 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
+//首页
 Route::get('/','ArticleController@index');
 Route::get('/home','ArticleController@index');
 
+//新增文章页
 Route::get('/article/create','ArticleController@create');
+//新增文章行为
 Route::post('/article/create','ArticleController@store');
+//文章详情页
 Route::get('/article/{num}','ArticleController@show');
 
-//更新页面
+//文章更新页面
 Route::get('/article/{num}/edit','ArticleController@edit');
-//更新行为
+//文章更新行为
 Route::put('/article/{num}','ArticleController@update');
 
-//删除行为
+//文章删除行为
 Route::post('/article/{num}/del','ArticleController@del');
+
+//注册页
 Route::get('/register','RegisterController@index');
+//注册行为
 Route::post('/register','RegisterController@register');
+//登陆页
 Route::get('/login','LoginController@index');
+//登陆行为
 Route::post('/login','LoginController@login');
+//登出行为
 Route::get('/logout','LoginController@logout');
 
 //提交评论
@@ -38,6 +48,13 @@ Route::get('/article/{num}/zan','ArticleController@zan');
 
 //个人主页
 Route::get('/user/{user}','UserController@show');
+
+//个人设置页
+Route::get('/user/{user}/setting','UserController@setting');
+
+//个人设置行为
+Route::post('/user/{user}/setting','UserController@settingStore');
+
 
 //管理后台
 Route::group(['prefix'=>'admin'],function (){
