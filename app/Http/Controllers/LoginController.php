@@ -19,10 +19,10 @@ class LoginController extends Controller
             'password'=>'required|min:3|max:20|',
         ]);
 
-        $user = request(['email','password']);
+       // $user = request(['email','password']);
         if(\Auth::attempt($user))
         {
-            return redirect('/');
+            return redirect('admin/home');
         }
         else
             return redirect()->back()->withInput()->withErrors('登陆失败');

@@ -22,13 +22,29 @@ class UserController extends Controller
     }
 
     //个人设置行为
-    public function settingStore(Request $request)
+    public function settingStore(Request $request,$id)
     {
         $this->validate($request,[
             'name'=>'required|min:3|max:255',
         ]);
 
-
+        $name = $request->get('name');
+        $user = User::find($id);
+        //dd($user);
+        if($name != $user->name)
+        {
+            if(User::where('name',$name)->count() > 0)
+            {
+                return redirect()->back()->withInput()->withErrors('用户名已被注册');
+            }
+            $user->name = $name;
+            $user->save();
+            return back()->withInput()->withErrors('修改成功！');
+        }
+        else
+        {
+            return redirect()->back()->withInput()->withErrors('请输入新的用户名');
+        }
     }
 
 
