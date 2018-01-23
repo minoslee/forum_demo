@@ -54,11 +54,18 @@ Route::group(['middleware'=>'auth:web'],function(){
 Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
     Route::get('/','LoginController@index');
     Route::post('/','LoginController@login');
+    Route::get('/login','LoginController@index');
+    Route::post('/login','LoginController@login');
 
     Route::get('/logout','LoginController@logout');
 
     Route::group(['middleware' => 'auth:admin'],function (){
         Route::get('/home','HomeController@index');
+
+        //用户管理
+        Route::get('/users','UserController@index');
+        Route::get('/users/create','UserController@create');
+        Route::post('/users/store','UserController@store');
     });
 
 });

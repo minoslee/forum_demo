@@ -1,6 +1,6 @@
-<header class="main-header">
+<header class="main-header" style="background-color: #000055;">
     <!-- Logo -->
-    <a href="/adminlte/index2.html" class="logo">
+    <a href="#" class="logo">
         <!-- mini logo for sidebar mini 50x50 pixels -->
         <span class="logo-mini"></span>
         <!-- logo for regular state and mobile devices -->
@@ -18,7 +18,7 @@
                 <!-- User Account: style can be found in dropdown.less -->
                 <li class="dropdown user user-menu">
                     <a href="/adminlte/#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        {{--<img src="/adminlte/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">--}}
                         <span class="hidden-xs">{{\Auth::guard("admin")->user()->name}}</span>
                     </a>
                     <ul class="dropdown-menu">
@@ -26,7 +26,7 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-right">
-                                <a href="/admin/logout" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{URL::asset('/admin/logout')}}" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                     </ul>

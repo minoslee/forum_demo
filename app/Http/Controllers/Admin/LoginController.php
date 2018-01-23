@@ -30,4 +30,11 @@ class LoginController extends Controller
             return redirect()->back()->withInput()->withErrors('登陆失败');
     }
 
+    //登出行为
+    public function logout()
+    {
+        \Auth::guard('admin')->logout();
+        return redirect('/admin');
+    }
+
 }

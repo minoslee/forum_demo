@@ -25,10 +25,9 @@ class RegisterController extends Controller
         $user->email = $request->get('email');
         $user->password = bcrypt($request->get('password'));
 
-        if($user->save())
+        if($user->save() == true)
             return redirect('/login');
         else
             return redirect('/');
-            //return redirect()->back()->withInput()->withErrors('注册失败');
     }
 }
