@@ -14,6 +14,10 @@
 Route::get('/','ArticleController@index');
 Route::get('/home','ArticleController@index');
 
+Route::get('/hot','ArticleController@hot');
+Route::get('/recent','ArticleController@recent');
+Route::get('/reply','ArticleController@reply');
+
 //注册页
 Route::get('/register','RegisterController@index');
 //注册行为
@@ -25,7 +29,8 @@ Route::post('/login','LoginController@login');
 //登出行为
 Route::get('/logout','LoginController@logout');
 //文章详情页
-Route::get('/article/{num}','ArticleController@show');
+Route::get('/article/{num}','ArticleController@show')->where('num', '[0-9]+');
+
 
 Route::group(['middleware'=>'auth:web'],function(){
     //新增文章页
@@ -66,6 +71,18 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
         Route::get('/users','UserController@index');
         Route::get('/users/create','UserController@create');
         Route::post('/users/store','UserController@store');
+        Route::get('/users/{users}/passw','UserController@passw');
+        Route::post('/users/{users}/passw','UserController@edit');
+
+        //文章审核
+        Route::get('/articles','ArticleController@index');
+        Route::post('/articles/{num}/confirm','ArticleController@confirm');
+        Route::post('/articles/{num}/reject','ArticleController@reject');
+        Route::post('/articles/{num}/del','ArticleController@del');
+
+        //评论审核
+        Route::get('/comments','CommentController@index');
+        Route::post('/comments/{num}/del','CommentController@del');
     });
 
 });

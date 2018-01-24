@@ -14,16 +14,33 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
-        //return view('article.index')->with('articles',Article::paginate(5));
+        return view('article.index',compact('articles'));
+    }
+
+    //zan
+    public function hot()
+    {
+        $articles = Article::orderBy('zan_cnt','desc')->withCount(['comment','zans'])->paginate(5);
+        return view('article.index',compact('articles'));
+    }
+
+    //recent
+    public function recent()
+    {
+        $articles = Article::orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
+        return view('article.index',compact('articles'));
+    }
+
+    //reply
+    public function reply()
+    {
+        $articles = Article::orderBy('reply_cnt','desc')->withCount(['comment','zans'])->paginate(5);
         return view('article.index',compact('articles'));
     }
 
     public function create()
     {
-        if(\Auth::check())
-            return view('article.create');
-        else
-            return redirect('/register');
+        return view('article.create');
     }
 
     public function store(Request $request)
@@ -36,12 +53,12 @@ class ArticleController extends Controller
         $article->title = $request->get('title');
         $article->content = $request->get('content');
         $article->user_id = \Auth::User()->id;
-       // $article->user_id = "1";
         if($article->save())
             return redirect('/home');
         else
             return redirect()->back()->withInput()->withErrors("新增失败");
     }
+
     //详情页
     public function show($id)
     {
@@ -93,6 +110,10 @@ class ArticleController extends Controller
         $comment->content = $request->get('content');
         $comment->article_id = $request->get('article_id');
 
+        $article = Article::find($request->get('article_id'));
+        $article->reply_cnt = $article->reply_cnt+1;
+        $article->save();
+
         if($comment->save())
             return redirect()->back();
         else
@@ -106,6 +127,10 @@ class ArticleController extends Controller
         $zan = new Zan();
         $zan->user_id = \Auth::id();
         $zan->article_id = $id;
+
+        $article = Article::find($id);
+        $article->zan_cnt = $article->zan_cnt + 1;
+        $article->save();
         if($zan->save())
             return redirect()->back();
     }

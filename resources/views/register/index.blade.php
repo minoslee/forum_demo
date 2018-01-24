@@ -44,8 +44,8 @@
         <input type="password" name="password_confirmation" class="form-control" placeholder="重复输入密码" required>
         @include('layout.error')
         <button class="btn btn-lg btn-primary btn-block" type="submit">注册</button>
-        <a href="{{url('/login')}}">登陆</a>
     </form>
+    <a href="{{url('/login')}}" class="btn btn-lg  btn-block" type="submit">去登陆</a>
 </div> <!-- /container -->
 
 </body>

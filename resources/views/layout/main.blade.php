@@ -17,9 +17,7 @@
 
 
     <!-- Custom styles for this template -->
-    <link href="/css/blog.css" rel="stylesheet">
-    <link rel="stylesheet" type="text/css" href="/css/wangEditor.min.css">
-
+    <link href="{{URL::asset('/css/blog.css')}}" rel="stylesheet">
 
     <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
     <!--[if lt IE 9]>
@@ -47,7 +45,7 @@
 
 @include("layout.footer")
 
-@yield("pagejs")
+
 <!-- Bootstrap core JavaScript
 ================================================== -->
 <!-- Placed at the end of the document so the pages load faster -->

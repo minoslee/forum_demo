@@ -24,11 +24,12 @@
                                     <td>{{$user->id}}.</td>
                                     <td>{{$user->name}}</td>
                                     <td>
-                                        <a type="button" class="btn" href="{{url("/admin/users/$user->id/role")}}" >角色管理</a>
+                                        <a type="button" class="btn" href="{{url("/admin/users/$user->id/passw")}}" >密码管理</a>
                                     </td>
                                 </tr>
                             @endforeach
                             </tbody></table>
+                        @include('admin.layout.error')
                     </div>
                     {{$users->links()}}
                 </div>
