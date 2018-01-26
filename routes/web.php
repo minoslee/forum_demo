@@ -83,6 +83,12 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
         //评论审核
         Route::get('/comments','CommentController@index');
         Route::post('/comments/{num}/del','CommentController@del');
+
+        //链接管理
+        Route::get('/links','LinkController@index');
+        Route::get('/links/add','LinkController@create');
+        Route::post('/links/add','LinkController@store');
+        Route::post('/links/{id}/del','LinkController@del');
     });
 
 });

@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Link;
 use App\User;
 use Illuminate\Http\Request;
 
@@ -10,15 +11,18 @@ class UserController extends Controller
     //个人中心页面
     public function show($id)
     {
+        $links = Link::all();
         $users = User::withCount('articles')->find($id);
-        $articles = $users->articles()->orderBy('created_at','desc')->get();
-        return view('user.show',compact('users','articles'));
+        $articles = $users->articles()->orderBy('created_at','desc')->paginate(10);
+        return view('user.show',compact('users','articles','links'));
     }
 
     //个人设置页面
     public function setting($id)
     {
-        return view('user.setting')->with('users',User::find($id));
+        $links = Link::all();
+        $users = User::find($id);
+        return view('user.setting',compact('links','users'));
     }
 
     //个人设置行为

@@ -16,7 +16,7 @@
 <!-- jQuery Knob Chart -->
 <script src="{{URL::asset('/adminlte/plugins/knob/jquery.knob.js')}}"></script>
 <!-- daterangepicker -->
-<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>
+{{--<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.11.2/moment.min.js"></script>--}}
 <script src="{{URL::asset('/adminlte/plugins/daterangepicker/daterangepicker.js')}}"></script>
 <!-- datepicker -->
 <script src="{{URL::asset('/adminlte/plugins/datepicker/bootstrap-datepicker.js')}}"></script>
@@ -26,4 +26,3 @@
 <script src="{{URL::asset('/adminlte/plugins/slimScroll/jquery.slimscroll.min.js')}}"></script>
 <!-- FastClick -->
 <script src="{{URL::asset('/adminlte/plugins/fastclick/fastclick.js')}}"></script>
-<script src="{{URL::asset('/js/admin.js')}}"></script>

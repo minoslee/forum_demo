@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Article;
 use App\Comment;
+use App\Link;
 use App\User;
 use App\Zan;
 use Illuminate\Http\Request;
@@ -14,21 +15,24 @@ class ArticleController extends Controller
     public function index()
     {
         $articles = Article::where('status','!=',-1)->orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
-        return view('article.index',compact('articles'));
+        $links = Link::all();
+        return view('article.index',compact(['articles','links']));
     }
 
     //zan
     public function hot()
     {
         $articles = Article::where('status','!=',-1)->orderBy('zan_cnt','desc')->withCount(['comment','zans'])->paginate(5);
-        return view('article.index',compact('articles'));
+        $links = Link::all();
+        return view('article.index',compact(['articles','links']));
     }
 
     //recent
     public function recent()
     {
         $articles = Article::where('status','!=',-1)->orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
-        return view('article.index',compact('articles'));
+        $links = Link::all();
+        return view('article.index',compact(['articles','links']));
     }
 
     //reply
@@ -38,12 +42,15 @@ class ArticleController extends Controller
         orderBy('reply_cnt','desc')->
         withCount(['comment','zans'])->
         paginate(5);
-        return view('article.index',compact('articles'));
+        $links = Link::all();
+        return view('article.index',compact(['articles','links']));
     }
 
     public function create()
     {
-        return view('article.create');
+        $links = Link::all();
+
+        return view('article.create',compact('links'));
     }
 
     public function store(Request $request)
@@ -65,7 +72,9 @@ class ArticleController extends Controller
     //详情页
     public function show($id)
     {
-        return view('article.main')->with('article',Article::find($id));
+        $links = Link::all();
+        $article = Article::find($id);
+        return view('article.main',compact(['article','links']));
     }
     
     //更新页面
