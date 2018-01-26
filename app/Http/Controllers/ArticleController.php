@@ -13,28 +13,31 @@ class ArticleController extends Controller
     //首页
     public function index()
     {
-        $articles = Article::orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
+        $articles = Article::where('status','!=',-1)->orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
         return view('article.index',compact('articles'));
     }
 
     //zan
     public function hot()
     {
-        $articles = Article::orderBy('zan_cnt','desc')->withCount(['comment','zans'])->paginate(5);
+        $articles = Article::where('status','!=',-1)->orderBy('zan_cnt','desc')->withCount(['comment','zans'])->paginate(5);
         return view('article.index',compact('articles'));
     }
 
     //recent
     public function recent()
     {
-        $articles = Article::orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
+        $articles = Article::where('status','!=',-1)->orderBy('created_at','desc')->withCount(['comment','zans'])->paginate(5);
         return view('article.index',compact('articles'));
     }
 
     //reply
     public function reply()
     {
-        $articles = Article::orderBy('reply_cnt','desc')->withCount(['comment','zans'])->paginate(5);
+        $articles = Article::where('status','!=',-1)->
+        orderBy('reply_cnt','desc')->
+        withCount(['comment','zans'])->
+        paginate(5);
         return view('article.index',compact('articles'));
     }
 

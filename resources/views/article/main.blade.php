@@ -6,22 +6,16 @@
             <div class="blog-post">
                 <div style="display:inline-flex">
                     <h2 class="blog-post-title">{{$article->title}}</h2>
-                    <a style="margin: auto"  href="{{url('/article/'.$article->id.'/edit')}}">
-                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
-                    </a>
-                    <a style="margin: auto"  href="{{url('/article/'.$article->id.'/del')}}">
-                        <span class="glyphicon glyphicon-remove" aria-hidden="true"></span>
-                    </a>
-                    <form action="{{ url('/articles/'.$article->id.'/del')}}" method="POST" style="display: inline;">
-                        {{ method_field('DELETE') }}
-                        {{ csrf_field() }}
-                        <button type="submit" class="btn btn-danger">删除</button>
-                    </form>
-
                 </div>
 
-                <p class="blog-post-meta">{{$article->created_at}} <a href="#">{{$article->user->name}}</a></p>
-                {{$article->content}}
+                @if(\Auth::id() == $article->user->id)
+                    <a style="margin: auto"  href="{{url("/article/$article->id/edit")}}">
+                        <span class="glyphicon glyphicon-pencil" aria-hidden="true"></span>
+                    </a>
+                @endif
+
+                <p class="blog-post-meta">{{$article->created_at}} <a href="{{url('/user/'.$article->user->id)}}">{{$article->user->name}}</a></p>
+                {!!$article->content  !!}
                 <div>
                     @if ($article->zan()->exists())
                         <a href="#" type="button" class="btn btn-primary btn-lg">您已赞过</a>

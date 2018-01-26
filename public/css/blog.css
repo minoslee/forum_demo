@@ -168,3 +168,6 @@ p {
 .blog-footer p:last-child {
     margin-bottom: 0;
 }
+img{
+    width:200px;
+}

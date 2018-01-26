@@ -14,7 +14,8 @@
                 <div class="blog-post">
                     <h2 class="blog-post-title"><a href="{{url('/article/'.$article->id)}}" >{{$article->title}}</a></h2>
                     <p class="blog-post-meta">{{$article->created_at}} by <a href="{{url('/user/'.$article->user->id)}}">{{$article->user->name}}</a></p>
-                    {!! str_limit($article->content, 100, '...') !!}
+                        {!! str_limit($article->content, 100, '...') !!}
+                <br>
                     <p class="blog-post-meta">赞 {{$article->zans_count}}  | 回复 {{$article->comment_count}}</p>
                 </div>
             @endif

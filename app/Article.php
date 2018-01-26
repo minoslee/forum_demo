@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use PhpParser\Builder;
 
 
 class Article extends Model
@@ -29,4 +30,5 @@ class Article extends Model
     {
         return $this->hasMany(Zan::class);
     }
+
 }
