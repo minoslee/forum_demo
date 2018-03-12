@@ -91,4 +91,5 @@ Route::group(['prefix'=>'admin','namespace'=>'Admin'],function (){
         Route::post('/links/{id}/del','LinkController@del');
     });
 
+    //Route::get('/test','HomeController@test');
 });

@@ -12,4 +12,10 @@ class HomeController extends Controller
     {
         return view('admin.home.index');
     }
+
+    public function test()
+    {
+        return view('admin.index');
+
+    }
 }
